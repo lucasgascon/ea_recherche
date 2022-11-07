@@ -2,6 +2,15 @@
 
 from keras_segmentation.models.segnet import resnet50_segnet
 
+def custom_augmentation():
+    return  iaa.Sequential(
+        [
+            # apply the following augmenters to most images
+            iaa.Fliplr(0.5),  # horizontally flip 50% of all images
+            iaa.Flipud(0.5), # horizontally flip 50% of all images
+        ])
+
+
 def train (model, n_classes, train_images, train_annotations, val_images, val_annotations,
                                             name_dataset, name_model, batch_size = 2, epochs = 5):
     model.train(
@@ -19,6 +28,9 @@ def train (model, n_classes, train_images, train_annotations, val_images, val_an
 
         checkpoints_path =  'tmp/' + name_dataset + '/' + name_model + '/', 
         epochs= epochs,
+
+        do_augment=True, # enable augmentation 
+        custom_augmentation=custom_augmentation # sets the augmention function to use
     )
 
     model.save_weights("pretrained/" + name_dataset + '/' + name_model + '_' + str(n_classes) + '/' )
