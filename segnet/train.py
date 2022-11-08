@@ -40,10 +40,10 @@ def train (model, n_classes, train_images, train_annotations, val_images, val_an
 n_classes = 200
 model = resnet50_segnet(n_classes=n_classes ,  input_height=416, input_width=608 ) 
 
-train_images = '../datasets/ADEChallengeData2016/images/training/'
-train_annotations = '../datasets/ADEChallengeData2016/annotations/training/'
-val_images = '../datasets/ADEChallengeData2016/images/validation/'
-val_annotations = '../datasets/ADEChallengeData2016/images/validation/'
+# train_images = '../datasets/ADEChallengeData2016/images/training/'
+# train_annotations = '../datasets/ADEChallengeData2016/annotations/training/'
+# val_images = '../datasets/ADEChallengeData2016/images/validation/'
+# val_annotations = '../datasets/ADEChallengeData2016/images/validation/'
 
 # train_images = '../datasets/dataset1/images_prepped_train/'
 # train_annotations = '../datasets/dataset1/annotations_prepped_train/'
