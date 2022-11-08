@@ -311,9 +311,11 @@ def evaluate(model=None, inp_images=None, annotations=None,
     n_pixels_norm = n_pixels / np.sum(n_pixels)
     frequency_weighted_IU = np.sum(cl_wise_score*n_pixels_norm)
     mean_IU = np.mean(cl_wise_score)
-
+    norm_random_walk = np.sum(fn)*100/n_pixels
     return {
         "frequency_weighted_IU": frequency_weighted_IU,
         "mean_IU": mean_IU,
-        "class_wise_IU": cl_wise_score
+        "class_wise_IU": cl_wise_score,
+        "Norm Random walk": norm_random_walk
+        
     }
