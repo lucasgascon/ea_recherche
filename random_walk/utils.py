@@ -6,6 +6,17 @@ import numpy as np
 import os
 import cv2
 
+def evaluationRW(labels, img):
+    if labels.shape != img.shape:
+        print("Error due to shape difference")
+        return
+    c = 0
+    for i in range(labels.shape[0]):
+        for j in range(labels.shape[1]):
+            if labels[i,j]!=img[i,j]:
+                c+=1
+    return c/(labels.shape[0]*labels.shape[1])*100
+
 def show_results_random_malk(image, markers, labels):
     fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(8, 3.2),
                                         sharex=True, sharey=True)
@@ -22,6 +33,56 @@ def show_results_random_malk(image, markers, labels):
     fig.tight_layout()
     plt.show()
     
+def show_results_random_walk02(image, markers, labels, masque, texte):
+    fig, (ax1, ax2, ax3, ax4) = plt.subplots(1, 4, figsize=(8, 3.2),
+                                        sharex=True, sharey=True)
+    
+    ax1.imshow(image)
+    ax1.axis('off')
+    ax1.set_title(texte[0])
+    
+    ax2.imshow(markers, cmap='gray')
+    ax2.axis('off')
+    ax2.set_title(texte[1])
+    
+    ax3.imshow(masque)
+    ax3.axis('off')
+    ax3.set_title(texte[2])
+    
+    ax4.imshow(labels)
+    ax4.axis('off')
+    ax4.set_title(texte[3])
+    
+    fig.tight_layout()
+    plt.show()
+    
+def show_all_results(image, markers, masque, labels, segnet, texte):
+    fig, (ax1, ax2, ax3, ax4, ax5) = plt.subplots(1, 5, figsize=(8, 3.2),
+                                        sharex=True, sharey=True)
+    
+    ax1.imshow(image)
+    ax1.axis('off')
+    ax1.set_title(texte[0])
+    
+    ax2.imshow(markers, cmap='gray')
+    ax2.axis('off')
+    ax2.set_title(texte[1])
+    
+    ax3.imshow(masque)
+    ax3.axis('off')
+    ax3.set_title(texte[2])
+    
+    ax4.imshow(labels)
+    ax4.axis('off')
+    ax4.set_title(texte[3])
+    
+    ax5.imshow(segnet)
+    ax5.axis('off')
+    ax5.set_title(texte[4])
+
+    fig.tight_layout()
+    plt.show()
+        
     """
     Parameters
 ----------
