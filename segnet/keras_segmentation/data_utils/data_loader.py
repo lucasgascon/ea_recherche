@@ -189,6 +189,7 @@ def get_segmentation_array(image_input, nClasses,
                               .format(str(type(image_input))))
 
     img = cv2.resize(img, (width, height), interpolation=cv2.INTER_NEAREST)
+
     img = img[:, :, 0]
 
     for c in range(nClasses):
