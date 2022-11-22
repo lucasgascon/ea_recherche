@@ -1,7 +1,7 @@
 datasets/
 segnet/tmp/
 segnet/pretrained/
-
+legacy/
 
 
 sync.expect
