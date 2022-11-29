@@ -60,21 +60,22 @@ class CheckpointsCallback(Callback):
 def train(model,
           train_images,
           train_annotations,
+          test_size,
           input_height=None,
           input_width=None,
           n_classes=None,
           verify_dataset=True,
           checkpoints_path=None,
           epochs=5,
-          batch_size=2,
+          batch_size=1,
           validate=False,
           val_images=None,
           val_annotations=None,
-          val_batch_size=2,
+          val_batch_size=1,
           auto_resume_checkpoint=False,
           load_weights=None,
-          steps_per_epoch=512,
-          val_steps_per_epoch=512,
+          steps_per_epoch=10,
+          val_steps_per_epoch=10,
           gen_use_multiprocessing=False,
           ignore_zero_class=False,
           optimizer_name='adam',
@@ -166,11 +167,12 @@ def train(model,
             assert verified
 
     train_gen = image_segmentation_generator(
-        train_images, train_annotations,  batch_size,  n_classes,
+        train_images, train_annotations,   batch_size,  n_classes,
         input_height, input_width, output_height, output_width,
         do_augment=do_augment, augmentation_name=augmentation_name,
         custom_augmentation=custom_augmentation, other_inputs_paths=other_inputs_paths,
         preprocessing=preprocessing, read_image_type=read_image_type)
+    
 
     if validate:
         val_gen = image_segmentation_generator(
@@ -195,6 +197,9 @@ def train(model,
 
     if callbacks is None:
         callbacks = []
+
+    for i in range(test_size):
+        next(train_gen)
 
     if not validate:
         model.fit(train_gen, steps_per_epoch=steps_per_epoch,

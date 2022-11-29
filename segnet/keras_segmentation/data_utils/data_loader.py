@@ -250,7 +250,8 @@ def image_segmentation_generator(images_path, segs_path, batch_size,
                                  augmentation_name="aug_all",
                                  custom_augmentation=None,
                                  other_inputs_paths=None, preprocessing=None,
-                                 read_image_type=cv2.IMREAD_COLOR , ignore_segs=False ):
+                                 read_image_type=cv2.IMREAD_COLOR , ignore_segs=False
+                                  ):
     
 
     if not ignore_segs:
@@ -262,13 +263,12 @@ def image_segmentation_generator(images_path, segs_path, batch_size,
         random.shuffle( img_list )
         img_list_gen = itertools.cycle( img_list )
 
-
     while True:
         X = []
-        Y = []
+        Y = []   
         for _ in range(batch_size):
             if other_inputs_paths is None:
-
+                
                 if ignore_segs:
                     im = next( img_list_gen )
                     seg = None 
